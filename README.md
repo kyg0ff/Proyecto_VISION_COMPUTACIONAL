@@ -27,14 +27,14 @@ https://lmb.informatik.uni-freiburg.de/resources/datasets/tem.en.html
 La colección contiene 6 subconjuntos independientes de imágenes de microscopía
 electrónica de transmisión con sus máscaras de segmentación:
 
-| Subconjunto | Imágenes | Máscaras |
-|---|---|---|
-| BMMC (Bone Marrow-Derived Mast Cells) | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/bio/data/BMMCdata.tar.bz2) | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/bio/data/BMMCmasks.tar.bz2) |
-| Jurkat Cell | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/bio/data/Jurkat_data.tar.bz2) | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/bio/data/Jurkat_masks.tar.bz2) |
-| Primary Mouse B Cell | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/data/PrMo_data.tar.bz2) | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/bio/data/PrMo_masks.tar.bz2) |
-| Primary Human B Cell | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/bio/data/PrHudata.tar.bz2) | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/bio/data/PrHumasks.tar.bz2) |
-| J558L | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/bio/data/J558Ldata.tar.bz2) | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/bio/data/J558Lmasks.tar.bz2) |
-| Human Blast | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/bio/data/HuBlastdata.tar.bz2) | [descarga](https://lmb.informatik.uni-freiburg.de/resources/datasets/bio/data/HuBlastmasks.tar.bz2) |
+| Subconjunto |
+|---|
+| BMMC (Bone Marrow-Derived Mast Cells) |
+| Jurkat Cell |
+| Primary Mouse B Cell |
+| Primary Human B Cell |
+| J558L |
+| Human Blast |
 
 **Uso:** los datos son para fines de investigación; se prohíbe su uso comercial.
 
@@ -51,7 +51,8 @@ electrónica de transmisión con sus máscaras de segmentación:
 Proyecto_VISION_COMPUTACIONAL/
 ├── data/                    # Dataset (imágenes crudas y procesadas)
 ├── src/
-│   └── preprocesamiento.py  # Pipeline de preprocesamiento
+│   ├── preprocesamiento/    # Funciones del pipeline (preprocesamiento.py)
+│   └── main.py              # Punto de entrada que ejecuta el pipeline
 ├── outputs/                 # Resultados generados
 ├── .gitignore
 └── README.md
@@ -80,7 +81,7 @@ Dependencias:
 2. Ejecutar el preprocesamiento:
 
 ```bash
-python src/preprocesamiento.py
+python src/main.py
 ```
 
 3. Los resultados se guardan en `outputs/`.

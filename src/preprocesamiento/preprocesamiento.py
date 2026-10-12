@@ -1,14 +1,7 @@
-"""Pipeline de preprocesamiento para el dataset TEM Cell Segmentation.
+"""Modulo de preprocesamiento para el dataset TEM Cell Segmentation.
 
-Lee las imagenes desde `data/`, aplica el pipeline con OpenCV/NumPy y guarda
-los resultados en `outputs/`.
-
-Uso:
-    python src/preprocesamiento.py --input data --output outputs
+Contiene las funciones del pipeline basadas en OpenCV/NumPy.
 """
-
-import argparse
-from pathlib import Path
 
 import cv2
 import numpy as np
@@ -75,54 +68,3 @@ def preprocesar(imagen, tamano=(256, 256)):
     binaria = binarizar(gris)
     mascara = limpiar_morfologia(binaria)
     return gris, mascara
-
-
-def listar_imagenes(directorio):
-    """Devuelve la lista de imagenes validas dentro de un directorio."""
-    return sorted(
-        p
-        for p in Path(directorio).rglob("*")
-        if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS
-    )
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Preprocesamiento del dataset TEM.")
-    parser.add_argument("--input", default="data", help="Carpeta con las imagenes.")
-    parser.add_argument("--output", default="outputs", help="Carpeta de resultados.")
-    parser.add_argument("--size", type=int, default=256, help="Lado de la imagen.")
-    args = parser.parse_args()
-
-    entrada = Path(args.input)
-    salida = Path(args.output)
-    salida.mkdir(parents=True, exist_ok=True)
-
-    imagenes = listar_imagenes(entrada)
-    if not imagenes:
-        print(f"No se encontraron imagenes en '{entrada}'.")
-        return
-
-    tamano = (args.size, args.size)
-    for ruta in imagenes:
-        imagen = cv2.imread(str(ruta), cv2.IMREAD_UNCHANGED)
-        if imagen is None:
-            print(f"Advertencia: no se pudo leer '{ruta}'.")
-            continue
-
-        gris, mascara = preprocesar(imagen, tamano)
-
-        relativa = ruta.relative_to(entrada).with_suffix(".png")
-        ruta_gris = salida / "gris" / relativa
-        ruta_mascara = salida / "mascaras" / relativa
-        ruta_gris.parent.mkdir(parents=True, exist_ok=True)
-        ruta_mascara.parent.mkdir(parents=True, exist_ok=True)
-
-        cv2.imwrite(str(ruta_gris), gris)
-        cv2.imwrite(str(ruta_mascara), mascara)
-        print(f"Procesada: {ruta}")
-
-    print(f"Listo. {len(imagenes)} imagenes procesadas en '{salida}'.")
-
-
-if __name__ == "__main__":
-    main()
