@@ -9,6 +9,11 @@ import numpy as np
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".tif", ".tiff", ".bmp"}
 
 
+def leer_imagen(ruta):
+    """Lee una imagen (incluye TIFF) preservando su profundidad de bits."""
+    return cv2.imread(str(ruta), cv2.IMREAD_UNCHANGED)
+
+
 def a_escala_de_grises(imagen):
     """Convierte una imagen BGR a escala de grises."""
     if imagen.ndim == 2:

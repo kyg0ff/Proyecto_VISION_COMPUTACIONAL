@@ -25,7 +25,8 @@ Grupo de Visión por Computadora, Universidad de Freiburg.
 https://lmb.informatik.uni-freiburg.de/resources/datasets/tem.en.html
 
 La colección contiene 6 subconjuntos independientes de imágenes de microscopía
-electrónica de transmisión con sus máscaras de segmentación:
+electrónica de transmisión con sus máscaras de segmentación. Las imágenes
+originales están en formato **TIFF (.tif)**.
 
 | Subconjunto |
 |---|
@@ -77,14 +78,15 @@ Dependencias:
 
 ## Uso
 
-1. Descargar el dataset y colocarlo en `data/`.
+1. Tener las imágenes **.tif** en `data/`.
 2. Ejecutar el preprocesamiento:
 
 ```bash
-python src/main.py
+python src/main.py                    # procesa todas las imágenes de data/
+python src/main.py --archivo ruta.tif # procesa solo una imagen
 ```
 
-3. Los resultados se guardan en `outputs/`.
+3. Los resultados (imagen preprocesada en escala de grises) se guardan en `outputs/`.
 
 ## Pipeline de preprocesamiento
 

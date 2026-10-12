@@ -2,6 +2,10 @@
 data/
 outputs/
 
+# Imágenes TIFF (dataset)
+*.tif
+*.tiff
+
 # Entornos virtuales
 .venv/
 venv/
